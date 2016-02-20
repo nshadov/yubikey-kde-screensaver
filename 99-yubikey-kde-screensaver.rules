@@ -1,0 +1,1 @@
+SUBSYSTEM=="usb", ACTION=="remove", ENV{ID_MODEL_ID}="0116", ENV{ID_VENDOR_ID}=="1050",   RUN+="/usr/local/bin/yubikey-lock-screen"

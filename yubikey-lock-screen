@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Write message to system log
+/usr/bin/logger "Screen locked because Yubikey has been disconnected."
+
+# For every user connected to DISPLAY:0, send DBUS message to lock screensaver
+for user in `/usr/bin/who | /bin/grep ':0' | /usr/bin/awk '{print $1}' | /usr/bin/sort -u`; do
+    /bin/su ${user} -c 'DISPLAY=:0 /usr/bin/qdbus org.freedesktop.ScreenSaver /ScreenSaver Lock'
+done
